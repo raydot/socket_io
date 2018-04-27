@@ -1,12 +1,15 @@
+/* https://socket.io/get-started/chat/ */
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var path = require('path');
-
-//app.use(express.static(__dirname + '/public'));
-//app.use(express.static(path.join(__dirname + '/styles'))); //allows html file to reference stylesheet "helloworld.css" that is stored in ./css directory
-
 var publicPath = path.resolve(__dirname);
+/* 	The socket.io page is not clear about the need to explicitly declare
+	all of the above. The example puts the CSS in a <style> tag in the
+	HTML header.
+*/
+
 app.use(express.static(publicPath));
 
 app.get('/', function(req, res) {
