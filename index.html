@@ -5,10 +5,31 @@
 	<title>Simple Chat in Socket.IO</title>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
+
+
+
 <body>
 	<ul id="messages"></ul>
 	<form action="">
 		<input id="m" autocomplete="off" /><button>Send</button>
 	</form>
+
+
+	<script src="/socket.io/socket.io.js"></script>
+	<!-- a little help from our friend jquery -->
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script> 
+		$(function () {
+			var socket = io();
+			$('form').submit(function() {
+				socket.emit('cmsg', $('#m').val());
+				$('#m').val('');
+				return false;
+			});
+			socket.on('cmsg', function(msg) {
+				$('#messages').append($('<li>').text(msg));
+			});
+		});
+	</script>
 </body>
 </html>
